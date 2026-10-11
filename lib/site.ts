@@ -13,6 +13,8 @@ export const SITE = {
   url: (process.env.NEXT_PUBLIC_SITE_URL || process.env.URL || "http://localhost:3000").replace(/\/$/, ""),
   /** Contato para correções ou pedidos de remoção. Deixe vazio para esconder a linha. */
   contact: "",
+  /** Chave Pix aleatória para doações voluntárias. Deixe vazio para esconder o bloco "Apoie o projeto". */
+  pix: "cf70d951-c48c-47b6-b003-e828a9f2531d",
   author: {
     name: "Gabriel",
     github: "https://github.com/gabcorreiadev",

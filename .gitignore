@@ -5,3 +5,4 @@ out
 .netlify
 next-env.d.ts
 *.tsbuildinfo
+Claude outputs/

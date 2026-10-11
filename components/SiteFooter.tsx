@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { SITE } from "@/lib/site";
 import { NAV } from "./nav";
+import { PixDonate } from "./PixDonate";
 import { ShareButtons } from "./ShareButtons";
 
 export function SiteFooter() {
@@ -12,6 +13,7 @@ export function SiteFooter() {
           <Link className="logo" href="/"><i aria-hidden="true"><b /><b /><b /></i>{SITE.logo}</Link>
           <p>{SITE.tagline}</p>
           <ShareButtons compact />
+          <PixDonate compact />
         </div>
         <nav aria-label="Páginas do site" className="foot-col">
           <span className="eyebrow">Páginas</span>

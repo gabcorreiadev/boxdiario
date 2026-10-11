@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { share } from "@/lib/seo";
 import Link from "next/link";
+import { PixDonate } from "@/components/PixDonate";
 import { ShareButtons } from "@/components/ShareButtons";
 import { SITE } from "@/lib/site";
 
@@ -30,6 +31,8 @@ export default function Sobre() {
         <p>Cada visita ajuda o projeto a crescer. Se você curtiu, manda para aquele amigo que acorda cedo no domingo para ver corrida.</p>
         <ShareButtons />
       </section>
+
+      <PixDonate />
 
       <p className="note">Quer saber de onde vêm as informações? Veja <Link href="/sobre/fontes">Fontes dos dados</Link> e <Link href="/sobre/direitos">Direitos e avisos</Link>.</p>
     </article>

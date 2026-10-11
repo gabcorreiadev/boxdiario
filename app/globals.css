@@ -550,3 +550,15 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; li
   .credit .gh:hover { border-color: var(--color-mist); }
   .credit svg { width: 16px; height: 16px; fill: var(--color-chalk); }
 }
+
+/* ---------- Pix ---------- */
+@layer components {
+  .pix { display: grid; gap: 12px; background: var(--color-carbon); border: 1px solid var(--color-line); border-left: 3px solid #32bcad; border-radius: 14px; padding: 16px 18px; max-width: 520px; }
+  .pix.compact { margin-top: 6px; }
+  .pix-head { display: flex; align-items: center; gap: 12px; }
+  .pix-head b { display: block; color: var(--color-chalk); font-weight: 600; }
+  .pix-head small { color: var(--color-mist); font-size: 13px; }
+  .pix-logo { flex: none; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 10px; background: #32bcad; color: #08221f; font: 800 12px var(--font-mono); letter-spacing: 0.06em; }
+  .pix-key { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .pix-key code { flex: 1 1 220px; min-width: 0; overflow-wrap: anywhere; font: 500 13px var(--font-mono); color: var(--color-ink); background: var(--color-asphalt); border: 1px solid var(--color-line); border-radius: 8px; padding: 10px 12px; user-select: all; }
+}

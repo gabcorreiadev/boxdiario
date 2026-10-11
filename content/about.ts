@@ -16,7 +16,7 @@ export const RIGHTS: { title: string; body: string[] }[] = [
   {
     title: "Natureza do site",
     body: [
-      "O {site} é um projeto independente de fã, feito no Brasil e sem fins comerciais. Não tem vínculo, patrocínio ou aprovação da Formula One Group, da FIA, das equipes, dos pilotos ou das emissoras citadas.",
+      "O {site} é um projeto independente de fã, feito no Brasil e mantido por doações voluntárias, que ajudam a pagar domínio e hospedagem. Não tem vínculo, patrocínio ou aprovação da Formula One Group, da FIA, das equipes, dos pilotos ou das emissoras citadas.",
     ],
   },
   {
@@ -39,6 +39,12 @@ export const RIGHTS: { title: string; body: string[] }[] = [
     body: [
       "Calendário, resultados e classificação chegam de forma automática pela API Jolpica-F1 e podem levar alguns minutos para atualizar depois de cada sessão.",
       "Horários são convertidos para o fuso do seu aparelho. Os canais de transmissão seguem o que foi divulgado pela emissora e podem mudar sem aviso; confira a programação oficial antes da corrida.",
+    ],
+  },
+  {
+    title: "Doações",
+    body: [
+      "As doações por Pix são voluntárias e não dão acesso a nenhum conteúdo extra: o site é e continua gratuito para todos. O valor ajuda a manter o domínio, a hospedagem e o tempo dedicado ao projeto.",
     ],
   },
   {

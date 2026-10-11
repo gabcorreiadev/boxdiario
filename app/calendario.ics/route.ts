@@ -14,7 +14,7 @@ export async function GET() {
     const where = r.broadcast.openTv ? "Globo (TV aberta), SporTV 3, Globoplay, F1 TV" : "SporTV 3, Globoplay, F1 TV";
     return [
       "BEGIN:VEVENT",
-      `UID:boxdiario-${start.getUTCFullYear()}-r${r.round}@boxdiario`,
+      `UID:boxnaveia-${start.getUTCFullYear()}-r${r.round}@boxnaveia`,
       `DTSTAMP:${now}`,
       `DTSTART:${stamp(start.toISOString())}`,
       `DTEND:${stamp(end.toISOString())}`,
@@ -29,6 +29,6 @@ export async function GET() {
       "END:VEVENT",
     ].join("\r\n");
   });
-  const body = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Box Diario//Calendario F1//PT-BR", "CALSCALE:GREGORIAN", "X-WR-CALNAME:Corridas de F1", ...events, "END:VCALENDAR"].join("\r\n");
+  const body = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Box na Veia//Calendario F1//PT-BR", "CALSCALE:GREGORIAN", "X-WR-CALNAME:Corridas de F1", ...events, "END:VCALENDAR"].join("\r\n");
   return new Response(body, { headers: { "Content-Type": "text/calendar; charset=utf-8", "Content-Disposition": 'inline; filename="corridas.ics"' } });
 }

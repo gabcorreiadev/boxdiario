@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import { share } from "@/lib/seo";
 import { StandingsTable } from "@/components/StandingsTable";
 import { getSeason, getStandings } from "@/lib/jolpica";
 import { pointsLeft } from "@/lib/points";
 
-export const metadata: Metadata = { title: "Campeonato", description: "Classificação atual de pilotos e equipes e a briga pelo título." };
+export const metadata: Metadata = { title: "Classificação da F1: pilotos e equipes", description: "Classificação atual de pilotos e equipes e a briga pelo título.", alternates: { canonical: "/campeonato" }, ...share("Classificação da F1: pilotos e equipes", "Classificação atual de pilotos e equipes e a briga pelo título.", "/campeonato") };
 export const revalidate = 3600;
 
 export default async function Campeonato() {

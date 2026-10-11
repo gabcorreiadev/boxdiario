@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { JsonLd } from "@/components/JsonLd";
 import { LocalTime } from "@/components/LocalTime";
 import { ResultsTabs } from "@/components/ResultsTabs";
 import { WatchChips } from "@/components/WatchChips";
 import { getSeason, getWeekendResults } from "@/lib/jolpica";
+import { SITE } from "@/lib/site";
 
 export const revalidate = 3600;
 // Páginas geradas na primeira visita e guardadas em cache (não estoura o limite da API no build).
@@ -18,7 +20,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const round = Number((await params).round);
   const races = await getSeason();
   const r = races.find((x) => x.round === round);
-  return r ? { title: r.name, description: `${r.name}: horários, onde assistir e resultado.` } : {};
+  if (!r) return {};
+  const year = r.startsAt.slice(0, 4);
+  const title = `${r.name} ${year}: horário, onde assistir e resultado`;
+  const description = `Horários do ${r.name} ${year} no seu fuso, onde assistir no Brasil (${r.broadcast.openTv ? "Globo, SporTV 3, Globoplay e F1 TV" : "SporTV 3, Globoplay e F1 TV"}), resultado e classificação completa.`;
+  return { title, description, alternates: { canonical: `/corridas/${r.round}` }, openGraph: { title, description, url: `/corridas/${r.round}` } };
 }
 
 export default async function RacePage({ params }: Props) {
@@ -31,8 +37,22 @@ export default async function RacePage({ params }: Props) {
   const prev = races.find((r) => r.round === round - 1);
   const next = races.find((r) => r.round === round + 1);
 
+  const done = results.race.length > 0;
   return (
     <>
+      <JsonLd data={{
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        name: `${race.name} ${race.startsAt.slice(0, 4)}`,
+        sport: "Fórmula 1",
+        startDate: race.startsAt,
+        endDate: new Date(Date.parse(race.startsAt) + 2 * 3600_000).toISOString(),
+        eventStatus: "https://schema.org/EventScheduled",
+        eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+        location: { "@type": "Place", name: race.circuit, address: { "@type": "PostalAddress", addressLocality: race.locality, addressCountry: race.country } },
+        url: `${SITE.url}/corridas/${race.round}`,
+        description: done ? `Resultado: vitória de ${results.race[0].name}.` : `Etapa ${race.round} da temporada.`,
+      }} />
       <header className={`race-head ${race.home ? "br" : ""}`}>
         <div className="wrap">
           <Link href="/corridas" className="eyebrow" style={{ textDecoration: "none" }}>← Corridas</Link>

@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CarIcon } from "@/components/CarIcon";
+import { JsonLd } from "@/components/JsonLd";
+import { share } from "@/lib/seo";
+import { SITE } from "@/lib/site";
 import { SennaTribute } from "@/components/SennaTribute";
 import { getLegend, LEGENDS } from "@/content/legends";
 import { LEGACY_TEAMS } from "@/lib/teams";
@@ -12,7 +15,10 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const l = getLegend((await params).slug);
-  return l ? { title: l.name, description: l.short } : {};
+  if (!l) return {};
+  const title = `${l.name}: títulos, vitórias e história`;
+  const description = `${l.short} ${l.titles.length ? `${l.titles.length} títulos mundiais` : "Vice-campeão"} e ${l.wins} vitórias na F1. Carros, conquistas e a corrida mais marcante.`;
+  return { title, description, alternates: { canonical: `/lendas/${l.slug}` }, ...share(title, description, `/lendas/${l.slug}`, "profile") };
 }
 
 export default async function LegendPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -21,6 +27,16 @@ export default async function LegendPage({ params }: { params: Promise<{ slug: s
 
   return (
     <>
+      <JsonLd data={{
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: p.name,
+        ...(p.nick ? { alternateName: p.nick } : {}),
+        nationality: p.country,
+        jobTitle: "Piloto de Fórmula 1",
+        description: p.story,
+        url: `${SITE.url}/lendas/${p.slug}`,
+      }} />
       <header className={`dh ${p.brazilian ? "br" : ""}`} style={{ ["--hue" as string]: p.hue }}>
         <div className="wrap">
           <Link href="/lendas" className="eyebrow" style={{ textDecoration: "none" }}>← Lendas</Link>

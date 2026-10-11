@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { FactTeaser } from "@/components/FactTeaser";
+import { JsonLd } from "@/components/JsonLd";
 import { LegendCard } from "@/components/LegendCard";
 import { NextRace } from "@/components/NextRace";
 import { RaceGrid } from "@/components/RaceCard";
@@ -7,6 +8,7 @@ import { StartLights } from "@/components/StartLights";
 import { Streaks } from "@/components/Streaks";
 import { LEGENDS } from "@/content/legends";
 import { getSeason, getStandings } from "@/lib/jolpica";
+import { SITE } from "@/lib/site";
 
 export const revalidate = 3600;
 
@@ -18,11 +20,22 @@ export default async function Home() {
 
   return (
     <>
+      <JsonLd data={{
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        name: SITE.name,
+        alternateName: `${SITE.name} · ${SITE.slogan}`,
+        url: SITE.url,
+        inLanguage: "pt-BR",
+        description: SITE.tagline,
+        author: { "@type": "Person", name: SITE.author.name, url: SITE.author.github },
+      }} />
       <section className="hero">
         <Streaks />
         <div className="wrap">
           <div>
             <StartLights />
+            <p className="eyebrow hero-kicker">{SITE.name} · {SITE.slogan}</p>
             <h1>Cinco luzes.<br /><em>Apagaram.</em></h1>
             <p className="lede">
               Tudo o que você precisa até a próxima largada: <strong>quando é, onde passa e por que importa</strong>.

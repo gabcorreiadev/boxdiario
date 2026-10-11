@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import { GLOSSARY } from "@/content/glossary";
+import { share } from "@/lib/seo";
+import { GlossaryExplorer } from "@/components/GlossaryExplorer";
 
-export const metadata: Metadata = { title: "Glossário", description: "As palavras da transmissão de F1 explicadas para quem está começando." };
-
-const GROUPS = ["Corrida", "Estratégia", "Regras", "Carro"] as const;
+export const metadata: Metadata = { title: "Glossário da F1: termos explicados para iniciantes", description: "As palavras da transmissão de F1 explicadas para quem está começando.", alternates: { canonical: "/glossario" }, ...share("Glossário da F1: termos explicados para iniciantes", "As palavras da transmissão de F1 explicadas para quem está começando.", "/glossario") };
 
 export default function Glossario() {
   return (
@@ -11,23 +10,9 @@ export default function Glossario() {
       <div className="wrap page-head">
         <span className="eyebrow">Rádio do box</span>
         <h1>Glossário</h1>
-        <p>As palavras que você ouve na transmissão, explicadas para quem está começando. Toque num termo para abrir.</p>
+        <p>As palavras que você ouve na transmissão, explicadas para quem está começando. Escolha um termo, veja o desenho e como ele aparece na corrida.</p>
       </div>
-      <section className="wrap" style={{ display: "grid", gap: 36 }}>
-        {GROUPS.map((g) => (
-          <div key={g}>
-            <h2 className="gloss-group">{g}</h2>
-            <div className="gloss">
-              {GLOSSARY.filter((t) => t.group === g).map((t) => (
-                <details className="term" key={t.term}>
-                  <summary>{t.term}</summary>
-                  <p>{t.text}</p>
-                </details>
-              ))}
-            </div>
-          </div>
-        ))}
-      </section>
+      <section className="wrap"><GlossaryExplorer /></section>
       <div style={{ height: 56 }} />
     </>
   );

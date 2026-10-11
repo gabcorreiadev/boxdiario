@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import { share } from "@/lib/seo";
 import { NextRace } from "@/components/NextRace";
 import { RaceGrid } from "@/components/RaceCard";
 import { WeekendSessions } from "@/components/WeekendSessions";
 import { getSeason, getSeasonWinners } from "@/lib/jolpica";
 
-export const metadata: Metadata = { title: "Corridas", description: "Calendário da temporada com horários no seu fuso e onde assistir no Brasil." };
+export const metadata: Metadata = { title: "Calendário da F1: horários e onde assistir no Brasil", description: "Calendário da temporada com horários no seu fuso e onde assistir no Brasil.", alternates: { canonical: "/corridas" }, ...share("Calendário da F1: horários e onde assistir no Brasil", "Calendário da temporada com horários no seu fuso e onde assistir no Brasil.", "/corridas") };
 export const revalidate = 3600;
 
 export default async function Corridas() {

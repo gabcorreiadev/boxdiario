@@ -1,4 +1,4 @@
-# Box Diário
+# Box na Veia
 
 Guia diário de F1 em português: próxima corrida com contagem regressiva e onde assistir no Brasil, lendas com homenagem a Ayrton Senna, campeonato, volta do dia com jogo e glossário.
 
@@ -22,9 +22,9 @@ Outros comandos:
 
 ## Publicar na Netlify
 
-1. Suba a pasta para um repositório no GitHub.
-2. Na Netlify: **Add new site → Import from Git** e escolha o repositório. O `netlify.toml` já tem o comando de build; o Next.js é detectado sozinho.
-3. Opcional: em **Site configuration → Environment variables**, crie `BROADCAST_URL` com a URL raw do `data/broadcast.json` no GitHub. Assim, editar esse arquivo no GitHub atualiza o site sem novo deploy (economiza créditos do plano grátis).
+1. Na Netlify: **Add new project → Import an existing project → GitHub** e escolha o repositório. O `netlify.toml` já tem o comando de build; o Next.js é detectado sozinho.
+2. Em **Project configuration → Environment variables**, crie `NEXT_PUBLIC_SITE_URL` com o endereço do site (ex.: `https://boxnaveia.netlify.app`). Ele é usado no Google e nas imagens de compartilhamento. Quando tiver domínio próprio, troque o valor e faça um novo deploy.
+3. Cada push na branch `main` gera um deploy em produção (15 dos 300 créditos do mês no plano grátis). Para testar sem gastar, trabalhe numa outra branch: a Netlify cria um Deploy Preview de graça.
 
 ## Onde mexer
 
@@ -75,7 +75,23 @@ O botão "Largada com som" toca os bipes das luzes e um carro passando. O som é
 
 ## Trocar o nome do site
 
-O nome fica em `lib/site.ts`. Mudou ali, muda no logo, no título das páginas e no calendário.
+O nome fica em `lib/site.ts`. Mudou ali, muda no logo, no título das páginas, no rodapé e no calendário. No mesmo arquivo ficam o endereço do site (`url`, usado no botão de compartilhar) e o contato para correções (`contact`, que aparece em "Direitos e avisos" quando preenchido).
+
+## Google (SEO)
+
+O site já sai pronto para o Google:
+
+- **Páginas montadas no servidor**: o Google lê o conteúdo completo, sem depender de JavaScript.
+- **`/sitemap.xml`** com todas as páginas (corridas, lendas, cada termo do glossário) e **`/robots.txt`**, gerados sozinhos.
+- **Título e descrição próprios** em cada página, pensados nas buscas em português ("horário da F1", "onde assistir GP de São Paulo", "o que é undercut").
+- **Imagem de compartilhamento** (1200x630) para WhatsApp e redes. Cada corrida tem a sua, com data, horário e canais.
+- **Dados estruturados** (schema.org): corridas como evento esportivo, lendas como pessoa, termos do glossário como definição.
+
+Quando o site estiver no ar:
+
+1. Confirme o domínio em `lib/site.ts` (`url`).
+2. Cadastre o site no [Google Search Console](https://search.google.com/search-console) e envie o endereço `https://SEU-DOMINIO/sitemap.xml`.
+3. Teste uma página de corrida no [Teste de pesquisa aprimorada](https://search.google.com/test/rich-results).
 
 ## Dados
 

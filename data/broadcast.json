@@ -1,0 +1,6 @@
+{
+  "season": 2026,
+  "source": "Globo, divulgado em dezembro de 2025 (Lance!). Atualize a cada mudança de grade.",
+  "default": { "openTv": false, "channels": ["SPORTV3", "GLOBOPLAY", "F1TV"] },
+  "openTvRounds": [1, 3, 6, 7, 8, 9, 10, 11, 12, 13, 14, 17, 20, 21, 23]
+}
